@@ -1,4 +1,4 @@
-const SLICE_COUNT = 13;
+const SLICE_COUNT = 12;
 const backgroundColor = "#ADD8E6"
 const circleWidth = 1500
 
@@ -28,9 +28,12 @@ function setup_layers(pScope){
   // effect.mode(SWIRL(10));
   // effect.set_boundary( 0, 1000 );
 
-  var testLayer = new PLayer(test)
-  testLayer.mode(SWIRL(5))
-  testLayer.set_boundary(200,1000)
+  // var testLayer = new PLayer(test)
+  // testLayer.mode(SWIRL(5))
+  // testLayer.set_boundary(200,1000)
+
+  var test2Layer = new PLayer(test2)
+  test2Layer.mode(SWIRL(7))
   
 }
 
@@ -47,6 +50,23 @@ function test(x, y, animation, pScope){
  
 }
 
+function test2(x, y, animation, pScope){
+  scale(2)
+  noStroke()
+  fill("#FAE")
+  ellipseSize = 80
+  ellipseHeight = 20
+  // if(animation.frame<1){
+    ellipse(0, 0, ellipseSize*animation.frame, 20);
+
+  // }else if(animation.frame>0.3 && animation.frame<0.7){
+    // ellipse(0, 0, 20/animation.frame);
+
+    // ellipse(0, 0, ellipseSize);
+  // }
+
+  // ellipseHeight += 10
+}
 
 
 function circles(x, y, animation, pScope){
