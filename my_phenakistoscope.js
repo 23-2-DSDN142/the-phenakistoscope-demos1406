@@ -1,6 +1,5 @@
 const SLICE_COUNT = 12;
 const backgroundColor = "#ADD8E6"
-const circleWidth = 1500
 
 function setup_pScope(pScope){
   pScope.output_mode(ANIMATED_DISK);
@@ -9,32 +8,30 @@ function setup_pScope(pScope){
   pScope.draw_layer_boundaries(true);
   pScope.set_direction(CCW);
   pScope.set_slice_count(SLICE_COUNT);
+  pScope.load_image("heart_circle" , "png");
 }
 
 function setup_layers(pScope){
   new PLayer(null, "white");  //lets us draw the whole circle background, ignoring the boundaries
 
-  // var layer1 = new PLayer(circles);
-  // layer1.mode(SWIRL(1));
-  // layer1.set_boundary(600, 2000);
+  // var Layer = new newPLayer(imageTest)
+  // Layer.mode(SWIRL(1))
 
-  // new PLayer(circleL);
+  var test3Layer = new PLayer(test3)
+  test3Layer.mode(SWIRL(5))
+  test3Layer.set_boundary(0,200)
+}
 
-  // var layer1 = new PLayer(Spin);
-  // layer1.mode(RING);
-  // layer1.set_boundary( 0, 300 );
-  
-  // var effect = new PLayer(dots);
-  // effect.mode(SWIRL(10));
-  // effect.set_boundary( 0, 1000 );
+function test3(x,y,animation,pScope){
+  // let ballSize  = 100 + (animation.wave(1)* 20)
+  scale(animation.frame*30);
+  noStroke()
+  fill(random(255), random(255), random(255))
+  ellipse(25,0,20); 
+}
 
-  // var testLayer = new PLayer(test)
-  // testLayer.mode(SWIRL(5))
-  // testLayer.set_boundary(200,1000)
-
-  var test2Layer = new PLayer(test2)
-  test2Layer.mode(SWIRL(7))
-  
+function imageTest(x,y,animation,pScope){
+  pScope.draw_image("heart_circle",x,y);
 }
 
 function test(x, y, animation, pScope){
@@ -51,13 +48,17 @@ function test(x, y, animation, pScope){
 }
 
 function test2(x, y, animation, pScope){
-  scale(2)
+  scale(animation.frame*2);
   noStroke()
   fill("#FAE")
   ellipseSize = 80
   ellipseHeight = 20
+
+  ellipse(-50, 0, ellipseSize*animation.frame, 20);
+  ellipse(50, 0, ellipseSize*animation.frame, 20);
+
+
   // if(animation.frame<1){
-    ellipse(0, 0, ellipseSize*animation.frame, 20);
 
   // }else if(animation.frame>0.3 && animation.frame<0.7){
     // ellipse(0, 0, 20/animation.frame);
@@ -67,6 +68,7 @@ function test2(x, y, animation, pScope){
 
   // ellipseHeight += 10
 }
+
 
 
 function circles(x, y, animation, pScope){
@@ -158,9 +160,9 @@ pop()
 function Spin(x, y, animation, pScope){
   push()
   scale(3)
-  // if(animation.frame == 0){
-  pScope.draw_image("spin.png",x,y);
-  // }
+  if(animation.frame == 0){
+    // pScope.draw_image("spin",x,y);
+  }
   pop()
   // translate(50 * animation.frame, 0);
   // scale(animation.frame*2);
@@ -174,4 +176,29 @@ function Spin(x, y, animation, pScope){
 function dots(x, y, animation, pScope){
   fill("red")
     ellipse(0,0,10, 10)
+  }
+
+  function lines(x, y, animation, pScope){
+    let angleOffset = (360 / SLICE_COUNT) / 2
+    let backgroundArcStart = 270 - angleOffset;
+    let backgroundArcEnd = 270 + angleOffset;
+    noStroke()
+    // const background = 
+    fill(backgroundColor)
+    ellipse(-20,-20,840,840)
+    // strokeWeight(1)
+    fill(color(255,0,0))
+    ellipse(-20,-20,800,800)
+    // fill(220)
+    // ellipse(-20,-20,800,800)
+  }
+
+  function circles(x,y,animation,pScope){
+    noStroke()
+    scale(animation.frame*2);
+  
+    fill("#FFFF8F")
+    ellipse(-50,0, 20, 20)
+    ellipse(50,0, 20, 20)
+  
   }
