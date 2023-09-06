@@ -53,6 +53,7 @@ This image must be placed in the assets folder.
 The second ... is the file type. This can be either png or jpg
 
 pScope.draw_image("...",x,y);
+
 You would put this in a function in which you want your image to display.
 The first ... is the name of the image you wish to display.
 This image must have already been loaded in the load_image function.
