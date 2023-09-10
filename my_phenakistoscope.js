@@ -1,10 +1,12 @@
 const SLICE_COUNT = 10;
 const backgroundColor = "#343642"
 
+// frameRate(30)
+
 const colors = ["#FEFDD9", "#FD8774", "#CA8763", "#93DAC8", "#349ABE", "#542826", "#331B28"]
 
 function setup_pScope(pScope){
-  pScope.output_mode(STATIC_DISK);
+  pScope.output_mode(ANIMATED_DISK);
   // STATIC_FRAME  ANIMATED_FRAME  STATIC_DISK  ANIMATED_DISK
   pScope.scale_for_screen(true);
   pScope.draw_layer_boundaries(false);
@@ -40,36 +42,65 @@ function setup_layers(pScope){
   // var outerLayer = new PLayer(outerRing)
   // outerLayer.mode(SWIRL(1))
 
-  new PLayer(a)
 
-  var bLayer = new PLayer(b)
-  bLayer.mode(RING)
+  new PLayer(whiteColor)
+  
+  // new PLayer(e)
 
-  new PLayer(c)
+  new PLayer(rings)
 
-  var dLayer = new PLayer(d);
-  dLayer.mode(RING);
+  var atomsLayer = new PLayer(atoms);
+  atomsLayer.mode(RING);
+
+  
+
+  new PLayer(centerCircle)
+
+  var bounceLayer = new PLayer(bounceC)
+  bounceLayer.mode(RING)
+  
   // dLayer.set_boundary( 500, 1000 );
 
-  // new PLayer(e)
-}
-
-function a(x,y,animation,pScope){
-  noStroke()
-  fill("#4faa90")
-  ellipse(x,y,225)
   
+
+  var midLayer = new PLayer(midCircles)
+  midLayer.mode(RING)
+
+  new PLayer(pinkCircles)
 }
 
-function b(x,y,animation,pScope){
+function whiteColor(x,y,animation,pScope){
+  // noStroke()
+  let whiteCol = color("#e2e9d9")
+  fill(whiteCol)
+  ellipse(x,y,1480)
+
+  fill(backgroundColor)
+  ellipse(x,y,1200)
+
+  // push()
+  // rect(-1000, y, 2000)
+  // rotate(-25)
+  // rotate(-30)
+  // rect(-1000, y, 2000)
+  // pop()
+}
+
+function centerCircle(x,y,animation,pScope){
+  noStroke()
+  fill("#88ceb4")
+  ellipse(x,y,225)
+}
+
+function bounceC(x,y,animation,pScope){
   rectMode(CENTER)
-  fill("#4faa90")
+  fill("#88ceb4")
   rect(x, 180 + (animation.wave(1) * 15), 10, 60)
   fill("#c95b74")
   ellipse(x, 250 + (animation.wave(1) * 15), 35)
 }
 
-function c(x,y,animation,pScope){
+function rings(x,y,animation,pScope){
   noFill()
   stroke("#626b72")
   ellipse(x, y, 725)
@@ -80,15 +111,15 @@ function c(x,y,animation,pScope){
   // ellipse(x, y, 1000)
 }
 
-function d(x, y, animation, pScope){
+function atoms(x, y, animation, pScope){
   noStroke()
 
   push()
     rotate(90 * animation.frame)
     // let jump = 750 + (animation.wave(1) * 50)
-    fill("#4faa90")
+    fill("#88ceb4")
     ellipse(x, 440, 35)
-    fill("#eaaf69")
+    fill("#007bd9")
     ellipse(150, 330, 35)
     fill("#c95b74")
     ellipse(300, 420, 35)
@@ -100,14 +131,63 @@ function e(x,y,animation,pScope){
   fill("#4faa90")
   push()
     rotate(90 * animation.frame)
-    ellipse(x,425,225)
+    ellipse(x, -440, 195)
   pop()
 }
 
-function colourTest(x, y, animation, pScope){
-  const startColour = 0;
-  const endColour = 0;
+function midCircles(x, y, animation, pScope){
+  noStroke()
+  const startColour1 = color("#88ceb4");
+  const endColour1 = color("#88ceb4");
+  endColour1.setAlpha(0);
+
+  const startColour2 = color("#007bd9");
+  const endColour2 = color("#007bd9");
+  endColour2.setAlpha(0)
+
+  let animatingColour1 = lerpColor(startColour1, endColour1, 10*animation.frame)
+  let animatingColour2 = lerpColor(startColour2, endColour2, 10*animation.frame)
+
+  push()
+    rotate(90 * animation.frame)
+    fill(animatingColour1)
+    ellipse(-360, 250, 195)
+    ellipse(x, -440, 195)
+    fill(animatingColour2)
+    ellipse(360, 250, 195)
+  pop()
 }
+
+function pinkCircles(x,y,animation,pScope){
+  frameRate(15)
+  pScope.set_direction(CCW)
+  noStroke()
+  let circleW = 140
+
+  let startColour = color("#c95b74")
+  let endColour = color("#c95b74")
+  endColour.setAlpha(0)
+
+  let animatingColour = lerpColor(startColour, endColour, 10*animation.frame)
+
+
+  push()
+    rotate(90 * animation.frame)
+    fill(animatingColour)
+    // ellipse(-72, 666, circleW)
+    ellipse(72, 666, circleW)
+    ellipse(215, 635, circleW)
+    ellipse(345, 575, circleW)
+    ellipse(460, 488, circleW)
+  pop()
+}
+
+
+
+
+
+
+
 
 
 
