@@ -1,40 +1,131 @@
-const SLICE_COUNT = 12;
-const backgroundColor = "#ADD8E6"
+const SLICE_COUNT = 10;
+const backgroundColor = "#343642"
 
-const colors = ["red", "green", "blue", "yellow", "orange"];
-const randomIndex = random(colors.length);
+const colors = ["#FEFDD9", "#FD8774", "#CA8763", "#93DAC8", "#349ABE", "#542826", "#331B28"]
 
 function setup_pScope(pScope){
-  pScope.output_mode(ANIMATED_DISK);
+  pScope.output_mode(STATIC_DISK);
   // STATIC_FRAME  ANIMATED_FRAME  STATIC_DISK  ANIMATED_DISK
   pScope.scale_for_screen(true);
   pScope.draw_layer_boundaries(false);
   pScope.set_direction(CCW);
   pScope.set_slice_count(SLICE_COUNT);
   pScope.load_image("eye" , "png");
+  pScope.load_image("leaf", "png")
 }
 
 function setup_layers(pScope){
-  new PLayer(null, "#f56e76");  //lets us draw the whole circle background, ignoring the boundaries
+  new PLayer(null, backgroundColor);  //lets us draw the whole circle background, ignoring the boundaries
 
 
-  var outerLayer = new PLayer(outerRing)
+  // var outerLayer = new PLayer(outerRing)
 
+  // var circlesLayer = new PLayer(circles)
+  // circlesLayer.mode(SWIRL(1))
 
-  var test2Layer = new PLayer(test2)
-  test2Layer.mode(SWIRL(7))
-  test2Layer.set_boundary(0,325)
+  // var test2Layer = new PLayer(test2)
+  // test2Layer.mode(SWIRL(7))
+  // test2Layer.set_boundary(0,325)
 
-  new PLayer(cutout)
+  // var leafLayer = new PLayer(leaf)
+  // leafLayer.mode(SWIRL(4))
+  // leafLayer.set_boundary(550,2000)
 
+  // new PLayer(cutout)
 
-  var eyeLayer = new PLayer(imageTest)
-  eyeLayer.mode(RING);
-  eyeLayer.set_boundary(0, 300);
+  // var eyeLayer = new PLayer(imageTest)
+  // eyeLayer.mode(RING);
+  // eyeLayer.set_boundary(0, 300);
 
+  // var outerLayer = new PLayer(outerRing)
+  // outerLayer.mode(SWIRL(1))
+
+  new PLayer(a)
+
+  var bLayer = new PLayer(b)
+  bLayer.mode(RING)
+
+  new PLayer(c)
+
+  var dLayer = new PLayer(d);
+  dLayer.mode(RING);
+  // dLayer.set_boundary( 500, 1000 );
+
+  // new PLayer(e)
 }
 
+function a(x,y,animation,pScope){
+  noStroke()
+  fill("#4faa90")
+  ellipse(x,y,225)
+  
+}
+
+function b(x,y,animation,pScope){
+  rectMode(CENTER)
+  fill("#4faa90")
+  rect(x, 180 + (animation.wave(1) * 15), 10, 60)
+  fill("#c95b74")
+  ellipse(x, 250 + (animation.wave(1) * 15), 35)
+}
+
+function c(x,y,animation,pScope){
+  noFill()
+  stroke("#626b72")
+  ellipse(x, y, 725)
+  ellipse(x, y, 800)
+  ellipse(x, y, 875)
+  ellipse(x, y, 950)
+  ellipse(x, y, 1025)
+  // ellipse(x, y, 1000)
+}
+
+function d(x, y, animation, pScope){
+  noStroke()
+
+  push()
+    rotate(90 * animation.frame)
+    // let jump = 750 + (animation.wave(1) * 50)
+    fill("#4faa90")
+    ellipse(x, 440, 35)
+    fill("#eaaf69")
+    ellipse(150, 330, 35)
+    fill("#c95b74")
+    ellipse(300, 420, 35)
+  pop()
+} 
+
+function e(x,y,animation,pScope){
+  noStroke()
+  fill("#4faa90")
+  push()
+    rotate(90 * animation.frame)
+    ellipse(x,425,225)
+  pop()
+}
+
+function colourTest(x, y, animation, pScope){
+  const startColour = 0;
+  const endColour = 0;
+}
+
+
+
+
+
+
+
+
+
+
 function outerRing(x, y, animation, pScope){
+  noFill()
+  strokeWeight(5)
+  ellipse(x, 970, 50)
+  ellipse(x, 920, 150)
+  ellipse(x, 870, 250)
+  ellipse(x, 820, 350)
+  ellipse(x, 770, 450)
 
 }
 
@@ -71,9 +162,16 @@ function test3(x,y,animation,pScope){
 
 }
 
+function leaf(x,y,animation,pScope){
+  push()
+  scale(0.15)
+  pScope.draw_image("leaf",x,y)
+  pop()
+}
+
 function imageTest(x,y,animation,pScope){
   push()
-  scale(1.8)
+  scale(1)
   if(animation.frame == 0){
     pScope.draw_image("eye",x,y);
   }
@@ -119,27 +217,29 @@ function test2(x, y, animation, pScope){
 
 function circles(x, y, animation, pScope){
   noStroke()
-
+  push()
+  scale(1.2)
   fill("#8B5FBF")
   ellipse(x,y,1600)
   fill("#7B4FA8")
-  ellipse(75,25,1400)
+  ellipse(x,y,1400)
   fill("#6B3F91")
-  ellipse(150,50,1200)
+  ellipse(x,y,1200)
   fill("#5B2F7A")
-  ellipse(225,75,1000)
+  ellipse(x,y,1000)
   fill("#4B1F63")
-  ellipse(300,100,800)
+  ellipse(x,y,800)
   fill("#3A41C6")
-  ellipse(375,125,600)
+  ellipse(x,y,600)
   fill("#2D2D8A")
-  ellipse(450,150,400)
+  ellipse(x,y,400)
   fill("#1F1F4D")
-  ellipse(525,175,200)
+  ellipse(x,y,200)
   fill("white")
   // ellipse(600,200,circleWidth-800)
 
   // for(int i = 0; i<10; )
+  pop()
 }
 
 
