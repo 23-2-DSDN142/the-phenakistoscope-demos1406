@@ -44,6 +44,8 @@ function setup_layers(pScope){
 
 
   new PLayer(whiteColor)
+
+  // new PLayer(roundEdges)
   
   new PLayer(rings)
 
@@ -62,7 +64,7 @@ function setup_layers(pScope){
 }
 
 function whiteColor(x,y,animation,pScope){
-  // noStroke()
+  noStroke()
   let whiteCol = color("#e2e9d9")
 
   fill(whiteCol)
@@ -86,8 +88,14 @@ function whiteColor(x,y,animation,pScope){
 
   noStroke()
   fill(whiteCol)
-  ellipse(-750,50,140)
+  ellipse(-670,y,140)
+  rotate(35)
+  ellipse(x, -670, 140)
 }
+
+// function roundEdges(x,y,animation,pScope){
+//   
+// }
 
 function centerCircle(x,y,animation,pScope){
   noStroke()
