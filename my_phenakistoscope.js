@@ -1,12 +1,11 @@
 const SLICE_COUNT = 10;
 const backgroundColor = "#343642"
 
-// frameRate(30)
 
 const colors = ["#FEFDD9", "#FD8774", "#CA8763", "#93DAC8", "#349ABE", "#542826", "#331B28"]
 
 function setup_pScope(pScope){
-  pScope.output_mode(ANIMATED_DISK);
+  pScope.output_mode(STATIC_DISK);
   // STATIC_FRAME  ANIMATED_FRAME  STATIC_DISK  ANIMATED_DISK
   pScope.scale_for_screen(true);
   pScope.draw_layer_boundaries(false);
@@ -14,6 +13,7 @@ function setup_pScope(pScope){
   pScope.set_slice_count(SLICE_COUNT);
   pScope.load_image("eye" , "png");
   pScope.load_image("leaf", "png")
+  frameRate(10)
 }
 
 function setup_layers(pScope){
@@ -45,24 +45,16 @@ function setup_layers(pScope){
 
   new PLayer(whiteColor)
   
-  // new PLayer(e)
-
   new PLayer(rings)
 
   var atomsLayer = new PLayer(atoms);
   atomsLayer.mode(RING);
-
-  
 
   new PLayer(centerCircle)
 
   var bounceLayer = new PLayer(bounceC)
   bounceLayer.mode(RING)
   
-  // dLayer.set_boundary( 500, 1000 );
-
-  
-
   var midLayer = new PLayer(midCircles)
   midLayer.mode(RING)
 
@@ -72,32 +64,44 @@ function setup_layers(pScope){
 function whiteColor(x,y,animation,pScope){
   // noStroke()
   let whiteCol = color("#e2e9d9")
+
   fill(whiteCol)
   ellipse(x,y,1480)
 
   fill(backgroundColor)
   ellipse(x,y,1200)
 
-  // push()
-  // rect(-1000, y, 2000)
-  // rotate(-25)
-  // rotate(-30)
-  // rect(-1000, y, 2000)
-  // pop()
+  push()
+  rect(-1000, y, 2000)
+  rotate(-25)
+  rotate(-30)
+  rect(-1000, y, 2000)
+  pop()
+
+  noFill()
+  stroke(whiteCol)
+  strokeWeight(5)
+  ellipse(x,y,1480)
+  ellipse(x,y,1200)
+
+  noStroke()
+  fill(whiteCol)
+  ellipse(-750,50,140)
 }
 
 function centerCircle(x,y,animation,pScope){
   noStroke()
   fill("#88ceb4")
-  ellipse(x,y,225)
+  ellipse(x,y,195)
 }
 
 function bounceC(x,y,animation,pScope){
+  noStroke()
   rectMode(CENTER)
   fill("#88ceb4")
-  rect(x, 180 + (animation.wave(1) * 15), 10, 60)
+  rect(x, 170 + (animation.wave(1) * 15), 15, 60)
   fill("#c95b74")
-  ellipse(x, 250 + (animation.wave(1) * 15), 35)
+  ellipse(x, 240 + (animation.wave(1) * 15), 35)
 }
 
 function rings(x,y,animation,pScope){
@@ -159,7 +163,6 @@ function midCircles(x, y, animation, pScope){
 }
 
 function pinkCircles(x,y,animation,pScope){
-  frameRate(15)
   pScope.set_direction(CCW)
   noStroke()
   let circleW = 140
