@@ -1,11 +1,17 @@
 const SLICE_COUNT = 10;
-const backgroundColor = "#343642"
-
 
 const colors = ["#FEFDD9", "#FD8774", "#CA8763", "#93DAC8", "#349ABE", "#542826", "#331B28"]
 
+const backgroundColor = "#343642"
+const blueCol = "#007bd9";
+const tealCol = "#88ceb4";
+const pinkCol = "#c95b74";
+const whiteCol = "#e2e9d9";
+const greyCol = "#626b72";
+
+
 function setup_pScope(pScope){
-  pScope.output_mode(STATIC_DISK);
+  pScope.output_mode(ANIMATED_DISK);
   // STATIC_FRAME  ANIMATED_FRAME  STATIC_DISK  ANIMATED_DISK
   pScope.scale_for_screen(true);
   pScope.draw_layer_boundaries(false);
@@ -13,39 +19,13 @@ function setup_pScope(pScope){
   pScope.set_slice_count(SLICE_COUNT);
   pScope.load_image("eye" , "png");
   pScope.load_image("leaf", "png")
-  frameRate(10)
+  frameRate(12)
 }
 
 function setup_layers(pScope){
   new PLayer(null, backgroundColor);  //lets us draw the whole circle background, ignoring the boundaries
 
-
-  // var outerLayer = new PLayer(outerRing)
-
-  // var circlesLayer = new PLayer(circles)
-  // circlesLayer.mode(SWIRL(1))
-
-  // var test2Layer = new PLayer(test2)
-  // test2Layer.mode(SWIRL(7))
-  // test2Layer.set_boundary(0,325)
-
-  // var leafLayer = new PLayer(leaf)
-  // leafLayer.mode(SWIRL(4))
-  // leafLayer.set_boundary(550,2000)
-
-  // new PLayer(cutout)
-
-  // var eyeLayer = new PLayer(imageTest)
-  // eyeLayer.mode(RING);
-  // eyeLayer.set_boundary(0, 300);
-
-  // var outerLayer = new PLayer(outerRing)
-  // outerLayer.mode(SWIRL(1))
-
-
   new PLayer(whiteColor)
-
-  // new PLayer(roundEdges)
   
   new PLayer(rings)
 
@@ -61,11 +41,16 @@ function setup_layers(pScope){
   midLayer.mode(RING)
 
   new PLayer(pinkCircles)
+
+  var outerLayer = new PLayer(outerCircle)
+  // outerLayer.mode(SWIRL(1))
+  // outerLayer.set_boundary(800,1000)
+
+  new PLayer(solidOuter)
 }
 
 function whiteColor(x,y,animation,pScope){
   noStroke()
-  let whiteCol = color("#e2e9d9")
 
   fill(whiteCol)
   ellipse(x,y,1480)
@@ -99,28 +84,30 @@ function whiteColor(x,y,animation,pScope){
 
 function centerCircle(x,y,animation,pScope){
   noStroke()
-  fill("#88ceb4")
+  fill(tealCol)
   ellipse(x,y,195)
 }
 
 function bounceC(x,y,animation,pScope){
   noStroke()
   rectMode(CENTER)
-  fill("#88ceb4")
+  fill(tealCol)
   rect(x, 170 + (animation.wave(1) * 15), 15, 60)
-  fill("#c95b74")
+  fill(pinkCol)
   ellipse(x, 240 + (animation.wave(1) * 15), 35)
 }
 
 function rings(x,y,animation,pScope){
   noFill()
-  stroke("#626b72")
+  stroke(greyCol)
   ellipse(x, y, 725)
   ellipse(x, y, 800)
   ellipse(x, y, 875)
   ellipse(x, y, 950)
   ellipse(x, y, 1025)
-  // ellipse(x, y, 1000)
+  ellipse(x, y, 1650)
+  ellipse(x, y, 1750)
+  ellipse(x, y, 1850)
 }
 
 function atoms(x, y, animation, pScope){
@@ -129,32 +116,23 @@ function atoms(x, y, animation, pScope){
   push()
     rotate(90 * animation.frame)
     // let jump = 750 + (animation.wave(1) * 50)
-    fill("#88ceb4")
+    fill(tealCol)
     ellipse(x, 440, 35)
-    fill("#007bd9")
+    fill(blueCol)
     ellipse(150, 330, 35)
-    fill("#c95b74")
+    fill(pinkCol)
     ellipse(300, 420, 35)
   pop()
 } 
 
-function e(x,y,animation,pScope){
-  noStroke()
-  fill("#4faa90")
-  push()
-    rotate(90 * animation.frame)
-    ellipse(x, -440, 195)
-  pop()
-}
-
 function midCircles(x, y, animation, pScope){
   noStroke()
-  const startColour1 = color("#88ceb4");
-  const endColour1 = color("#88ceb4");
+  const startColour1 = color(tealCol);
+  const endColour1 = color(tealCol);
   endColour1.setAlpha(0);
 
-  const startColour2 = color("#007bd9");
-  const endColour2 = color("#007bd9");
+  const startColour2 = color(blueCol);
+  const endColour2 = color(blueCol);
   endColour2.setAlpha(0)
 
   let animatingColour1 = lerpColor(startColour1, endColour1, 10*animation.frame)
@@ -175,8 +153,8 @@ function pinkCircles(x,y,animation,pScope){
   noStroke()
   let circleW = 140
 
-  let startColour = color("#c95b74")
-  let endColour = color("#c95b74")
+  let startColour = color(pinkCol)
+  let endColour = color(pinkCol)
   endColour.setAlpha(0)
 
   let animatingColour = lerpColor(startColour, endColour, 10*animation.frame)
@@ -193,7 +171,31 @@ function pinkCircles(x,y,animation,pScope){
   pop()
 }
 
+function outerCircle(x,y,animation,pScope){
+  noFill()
+  strokeWeight(5)
+ 
+  push()
+  rotate(90 * animation.frame)
+  stroke(pinkCol)
+  ellipse(-130, 815, 45)
+  ellipse(130, 815, 45)
+  
+  stroke(blueCol)
+  ellipse(x,875,50)
 
+  stroke(tealCol)
+  fill(tealCol)
+  ellipse(-300, 875, 45)
+  pop()
+}
+
+function solidOuter(x,y,animation,pScope){
+  noStroke()
+  fill(tealCol)
+  // ellipse(-300, 875, 50)
+
+}
 
 
 
