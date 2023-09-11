@@ -271,16 +271,7 @@ function imageTest(x,y,animation,pScope){
   pop()
 }
 
-function test(x, y, animation, pScope){
-  noStroke()
-  fill("#FAE")
-  ellipseSize = 80
-  if(animation.frame<0.5){
-    scale(3)
-    ellipse(0, 0, ellipseSize*animation.frame);
-  }else{
-    ellipse(0, 0, ellipseSize/animation.frame);
-  }
+function eye(x, y, animation, pScope){
  
 }
 
@@ -358,9 +349,6 @@ function circleL(x, y, animation, pScope){
 
 
 
-// var layer1 = new PLayer(circles);
-// layer1.mode(SWIRL(1));
-// layer1.set_boundary( 0, 800 );
 
 // var layer2 = new PLayer(edge);
 // layer2.mode(RING);
