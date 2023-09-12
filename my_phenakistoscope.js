@@ -1,10 +1,10 @@
 const SLICE_COUNT = 10;
 
-const backgroundColor = "#242527"
-const blueCol = "#ffcd26";
-const tealCol = "#02a997";
-const pinkCol = "#dc531f";
-const whiteCol = "#f3ded1";
+const backgroundColor = "#343642"
+const blueCol = "#007bd9";
+const tealCol = "#88ceb4";
+const pinkCol = "#c95b74";
+const whiteCol = "#e2e9d9";
 const greyCol = "#626b72";
 
 
