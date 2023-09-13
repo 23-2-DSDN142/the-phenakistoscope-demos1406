@@ -1,11 +1,11 @@
 const SLICE_COUNT = 10;
 
-const backgroundColor = "#2b0d29"
-const blueCol = "#fad008";
-const tealCol = "#6072c4";
-const pinkCol = "#eb2ea4";
-const whiteCol = "#e2e9d9";
-const greyCol = "#626b72";
+const backgroundColor = "#1d2563"
+const blueCol = "#98138c";
+const tealCol = "#2aba9b";
+const pinkCol = "#f62769";
+const whiteCol = "#fef6fd";
+const greyCol = "#555b99";
 
 
 function setup_pScope(pScope){
@@ -15,8 +15,6 @@ function setup_pScope(pScope){
   pScope.draw_layer_boundaries(false);
   pScope.set_direction(CCW);
   pScope.set_slice_count(SLICE_COUNT);
-  pScope.load_image("eye" , "png");
-  pScope.load_image("leaf", "png")
   frameRate(12)
 }
 
@@ -41,8 +39,6 @@ function setup_layers(pScope){
   new PLayer(pinkCircles)
 
   var outerLayer = new PLayer(outerCircle)
-  // outerLayer.mode(SWIRL(1))
-  // outerLayer.set_boundary(800,1000)
 
   new PLayer(solidOuter)
 }
@@ -75,10 +71,6 @@ function whiteColor(x,y,animation,pScope){
   rotate(35)
   ellipse(x, -670, 140)
 }
-
-// function roundEdges(x,y,animation,pScope){
-//   
-// }
 
 function centerCircle(x,y,animation,pScope){
   noStroke()
