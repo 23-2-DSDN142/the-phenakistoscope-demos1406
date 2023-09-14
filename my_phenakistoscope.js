@@ -1,11 +1,12 @@
 const SLICE_COUNT = 10;
 
-const backgroundColor = "#1d2563"
-const blueCol = "#98138c";
-const tealCol = "#2aba9b";
-const pinkCol = "#f62769";
-const whiteCol = "#fef6fd";
-const greyCol = "#555b99";
+// colours
+const backgroundColor = "#343642"
+const blueCol = "#007bd9";
+const tealCol = "#88ceb4";
+const pinkCol = "#c95b74";
+const whiteCol = "#e2e9d9";
+const greyCol = "#626b72";
 
 
 function setup_pScope(pScope){
@@ -15,13 +16,13 @@ function setup_pScope(pScope){
   pScope.draw_layer_boundaries(false);
   pScope.set_direction(CCW);
   pScope.set_slice_count(SLICE_COUNT);
-  frameRate(12)
+
 }
 
 function setup_layers(pScope){
   new PLayer(null, backgroundColor);  //lets us draw the whole circle background, ignoring the boundaries
 
-  new PLayer(whiteColor)
+  new PLayer(whiteShape)
   
   new PLayer(rings)
 
@@ -38,12 +39,11 @@ function setup_layers(pScope){
 
   new PLayer(pinkCircles)
 
-  var outerLayer = new PLayer(outerCircle)
-
-  new PLayer(solidOuter)
+  new PLayer(outerCircle)
 }
 
-function whiteColor(x,y,animation,pScope){
+// white shape in the middle
+function whiteShape(x,y,animation,pScope){
   noStroke()
 
   fill(whiteCol)
@@ -72,12 +72,14 @@ function whiteColor(x,y,animation,pScope){
   ellipse(x, -670, 140)
 }
 
+// just the circle in the middle
 function centerCircle(x,y,animation,pScope){
   noStroke()
   fill(tealCol)
   ellipse(x,y,195)
 }
 
+// bouncing shapes around the central circle
 function bounceC(x,y,animation,pScope){
   noStroke()
   rectMode(CENTER)
@@ -87,6 +89,7 @@ function bounceC(x,y,animation,pScope){
   ellipse(x, 240 + (animation.wave(1) * 15), 35)
 }
 
+// atom rings
 function rings(x,y,animation,pScope){
   noFill()
   stroke(greyCol)
@@ -100,6 +103,7 @@ function rings(x,y,animation,pScope){
   ellipse(x, y, 1850)
 }
 
+// center atoms (actually electrons)
 function atoms(x, y, animation, pScope){
   noStroke()
 
@@ -115,6 +119,7 @@ function atoms(x, y, animation, pScope){
   pop()
 } 
 
+// large circles over the atoms
 function midCircles(x, y, animation, pScope){
   noStroke()
   const startColour1 = color(tealCol);
@@ -138,6 +143,7 @@ function midCircles(x, y, animation, pScope){
   pop()
 }
 
+// four pink circles in the middle
 function pinkCircles(x,y,animation,pScope){
   pScope.set_direction(CCW)
   noStroke()
@@ -161,6 +167,7 @@ function pinkCircles(x,y,animation,pScope){
   pop()
 }
 
+// electrons on the outer rings
 function outerCircle(x,y,animation,pScope){
   noFill()
   strokeWeight(5)
@@ -178,11 +185,4 @@ function outerCircle(x,y,animation,pScope){
   fill(tealCol)
   ellipse(-300, 875, 45)
   pop()
-}
-
-function solidOuter(x,y,animation,pScope){
-  noStroke()
-  fill(tealCol)
-  // ellipse(-300, 875, 50)
-
 }
